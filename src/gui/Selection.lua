@@ -22,7 +22,7 @@ function Selection:init(def)
     self.width = def.width
     self.font = def.font or gFonts['small']
 
-    self.gapHeight = self.height / #self.items
+    self.gapHeight = self.height / 2
 
     self.currentSelection = 1
 end
@@ -56,17 +56,24 @@ end
 
 function Selection:render()
     local currentY = self.y
+    local currentX = self.x
 
     for i = 1, #self.items do
         local paddedY = currentY + (self.gapHeight / 2) - self.font:getHeight() / 2
+        local paddedX = currentX
 
         -- draw selection marker if we're at the right index
         if i == self.currentSelection then
-            love.graphics.draw(gTextures['cursor'], self.x - 8, paddedY)
+            love.graphics.draw(gTextures['cursor'], paddedX - 4, paddedY)
         end
 
-        love.graphics.printf(self.items[i].text, self.x, paddedY, self.width, 'center')
+        love.graphics.printf(self.items[i].text, paddedX, paddedY, self.width / 2, 'center')
 
-        currentY = currentY + self.gapHeight
+        if i < 2 then
+            currentY = currentY + self.gapHeight - 5
+        else
+            currentY = self.y
+            currentX = currentX + self.width / 2
+        end
     end
 end

@@ -12,9 +12,9 @@ function BattleMenuState:init(battleState)
     self.battleState = battleState
     
     self.battleMenu = Menu {
-        x = VIRTUAL_WIDTH - 64,
+        x = VIRTUAL_WIDTH - 128,
         y = VIRTUAL_HEIGHT - 64,
-        width = 64,
+        width = 128,
         height = 64,
         items = {
             {
@@ -60,6 +60,13 @@ function BattleMenuState:init(battleState)
                             end))
                         end))
                     end)
+                end
+            },
+            {
+                text = 'Catch',
+                onSelect = function()
+                    gStateStack:pop()
+                    gStateStack:push(CatchState(self.battleState))
                 end
             }
         }
