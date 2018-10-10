@@ -186,7 +186,7 @@ function TakeTurnState:victory()
 
             -- sum all IVs and multiply by level to get exp amount
             local exp = (self.opponentPokemon.HPIV + self.opponentPokemon.attackIV +
-                self.opponentPokemon.defenseIV + self.opponentPokemon.speedIV) * self.opponentPokemon.level
+                self.opponentPokemon.defenseIV + self.opponentPokemon.speedIV) * self.opponentPokemon.level * 4
 
             gStateStack:push(BattleMessageState('You earned ' .. tostring(exp) .. ' experience points!',
                 function() end, false))
@@ -212,12 +212,21 @@ function TakeTurnState:victory()
 
                         -- set our exp to whatever the overlap is
                         self.playerPokemon.currentExp = self.playerPokemon.currentExp - self.playerPokemon.expToLevel
-                        self.playerPokemon:levelUp()
+                        
+                        local hp, attack, defense, speed = self.playerPokemon:levelUp()
+
+                        statsIncrease = {hp, attack, defense, speed}
 
                         gStateStack:push(BattleMessageState('Congratulations! Level Up!',
                         function()
                             self:fadeOutWhite()
                         end))
+
+                        gStateStack:push(ExpDialogueState(self.battleState, statsIncrease, 
+                        function()
+                            self:fadeOutWhite()
+                        end))
+
                     else
                         self:fadeOutWhite()
                     end
