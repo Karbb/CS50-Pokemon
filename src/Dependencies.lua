@@ -6,6 +6,7 @@ Class = require 'lib/class'
 Event = require 'lib/knife.event'
 push = require 'lib/push'
 Timer = require 'lib/knife.timer'
+Easing = require 'lib/easing'
 
 require 'src/Animation'
 require 'src/constants'
@@ -59,6 +60,7 @@ gTextures = {
     ['tiles'] = love.graphics.newImage('graphics/sheet.png'),
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
     ['cursor'] = love.graphics.newImage('graphics/cursor.png'),
+    ['glball'] = love.graphics.newImage('graphics/glball.png'),
 
     ['aardart-back'] = love.graphics.newImage('graphics/pokemon/aardart-back.png'),
     ['aardart-front'] = love.graphics.newImage('graphics/pokemon/aardart-front.png'),
