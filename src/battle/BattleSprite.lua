@@ -36,9 +36,13 @@ function BattleSprite:update(dt)
 end
 
 function BattleSprite:originalState()
-    self.opacity = 255
-    self.blinking = false
-    self.scaleFactor = 1
+    Timer.tween(0.5,{
+        [self] = {opacity = 255, scaleFactor = 1}
+    }):finish(
+        function()
+            self.blinking = false
+        end
+    )
 end
 
 function BattleSprite:render()
