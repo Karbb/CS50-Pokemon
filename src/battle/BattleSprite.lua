@@ -15,6 +15,8 @@ function BattleSprite:init(texture, x, y)
     self.opacity = 255
     self.blinking = false
     self.scaleFactor = 1
+    self.x0 = 0 
+    self.y0 = 0
 
     -- https://love2d.org/forums/viewtopic.php?t=79617
     -- white shader that will turn a sprite completely white when used; allows us
@@ -41,6 +43,20 @@ function BattleSprite:originalState()
     }):finish(
         function()
             self.blinking = false
+            self.x0 = 0 
+            self.y0 = 0        
+        end
+    )
+end
+
+function BattleSprite:originalPosition()
+    Timer.tween(0.5,{
+        [self] = {opacity = 255, scaleFactor = 1}
+    }):finish(
+        function()
+            self.blinking = false
+            self.x0 = 0 
+            self.y0 = 0        
         end
     )
 end
@@ -53,7 +69,7 @@ function BattleSprite:render()
     love.graphics.setShader(self.whiteShader)
     self.whiteShader:send('WhiteFactor', self.blinking and 1 or 0)
 
-    love.graphics.draw(gTextures[self.texture], self.x, self.y, 0 , self.scaleFactor, self.scaleFactor)
+    love.graphics.draw(gTextures[self.texture], self.x + gTextures[self.texture]:getWidth()/2, self.y + gTextures[self.texture]:getHeight()/2, 0, self.scaleFactor, self.scaleFactor, gTextures[self.texture]:getWidth()/2, gTextures[self.texture]:getHeight()/2)
 
     -- reset shader
     love.graphics.setShader()

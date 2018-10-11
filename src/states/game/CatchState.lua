@@ -42,13 +42,18 @@ function CatchState:catch(pokemon, onEnd)
             function()
                 -- pokemon sprite white and scaled
                 self.opponentSprite.blinking = true
+                local x0 = self.opponentSprite.x
+                local y0 = self.opponentSprite.y
                 Timer.tween(1.5, {
-                    [self.opponentSprite] = { scaleFactor = 0.1 },
+                    [self.opponentSprite] = { scaleFactor = 0.1, x =  x0 - gTextures[self.opponentSprite.texture]:getWidth()/2,
+                    y = y0 - gTextures[self.opponentSprite.texture]:getHeight()/2 },
                 })
                     :finish(
                         function()
                             -- glball down
                             self.opponentSprite.opacity = 0
+                            self.opponentSprite.x =  self.opponentSprite.x + gTextures[self.opponentSprite.texture]:getWidth()/2
+                            self.opponentSprite.y =  self.opponentSprite.y + gTextures[self.opponentSprite.texture]:getHeight()/2
                             Timer.tween(0.3, {
                                 [self.ballSprite] = { x = self.opponentSprite.x, y = self.opponentSprite.y },
                             })
