@@ -186,7 +186,7 @@ function TakeTurnState:victory()
 
             -- sum all IVs and multiply by level to get exp amount
             local exp = (self.opponentPokemon.HPIV + self.opponentPokemon.attackIV +
-                self.opponentPokemon.defenseIV + self.opponentPokemon.speedIV) * self.opponentPokemon.level * 4
+                self.opponentPokemon.defenseIV + self.opponentPokemon.speedIV) * self.opponentPokemon.level
 
             gStateStack:push(BattleMessageState('You earned ' .. tostring(exp) .. ' experience points!',
                 function() end, false))

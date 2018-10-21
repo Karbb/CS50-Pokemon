@@ -41,6 +41,12 @@ function EntityWalkState:attemptMove()
         return
     end
 
+    if self.level.grassLayer.tiles[toY][toX].id == TILE_IDS['grass-ball'] then
+        self.entity:changeState('idle')
+        self.entity:changeAnimation('idle-' .. tostring(self.entity.direction))
+        return
+    end
+
     self.entity.mapY = toY
     self.entity.mapX = toX
 

@@ -8,8 +8,9 @@
 
 BattleState = Class{__includes = BaseState}
 
-function BattleState:init(player)
+function BattleState:init(player, level)
     self.player = player
+    self.level = level
     self.bottomPanel = Panel(0, VIRTUAL_HEIGHT - 64, VIRTUAL_WIDTH, 64)
 
     -- flag for when the battle can take input, set in the first update call

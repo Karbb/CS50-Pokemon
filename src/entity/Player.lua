@@ -16,4 +16,6 @@ function Player:init(def)
             Pokemon(Pokemon.getRandomDef(), 5)
         }
     }
+
+    self.glball = math.random(3) + 2
 end

@@ -32,6 +32,25 @@ function PlayState:update(dt)
         end))
     end
 
+    if love.keyboard.wasPressed('space') or love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        local entity = self.level.player
+        local toX, toY = entity.mapX, entity.mapY
+
+        if entity.direction == 'left' then
+            toX = toX - 1
+        elseif entity.direction == 'right' then
+            toX = toX + 1
+        elseif entity.direction == 'up' then
+            toY = toY - 1
+        else
+            toY = toY + 1
+        end
+
+        if self.level.grassLayer.tiles[toY][toX].id == TILE_IDS['grass-ball'] then
+            self.level:pickUpBall(toX, toY)
+        end
+    end
+
     self.level:update(dt)
 end
 
